@@ -225,10 +225,10 @@ const bezier = (entity) => {
 }
 
 /**
- * Switcth the appropriate function on entity type. CIRCLE, ARC and ELLIPSE
+ * Switch the appropriate function on entity type. CIRCLE, ARC and ELLIPSE
  * produce native SVG elements, the rest produce interpolated polylines.
  */
-const entityToBoundsAndElement = (entity) => {
+export const entityToBoundsAndElement = (entity) => {
   switch (entity.type) {
     case 'CIRCLE':
       return circle(entity)
@@ -260,7 +260,7 @@ const entityToBoundsAndElement = (entity) => {
 
 export default (parsed) => {
   const entities = denormalise(parsed)
-  const { bbox, elements } = entities.reduce((acc, entity, i) => {
+  var { bbox, elements } = entities.reduce((acc, entity, i) => {
     const rgb = getRGBForEntity(parsed.tables.layers, entity)
     const boundsAndElement = entityToBoundsAndElement(entity)
     // Ignore entities like MTEXT that don't produce SVG elements
